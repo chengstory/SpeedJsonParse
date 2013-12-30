@@ -72,13 +72,13 @@ ActionNode::~ActionNode()
 
 }
 
-void ActionNode::initWithDictionary(cs::CSJsonDictionary *dic,CCObject* root)
+void ActionNode::initWithDictionary(const rapidjson::Value& dic,CCObject* root)
 {
 	setActionTag(DICTOOL->getIntValue_json(dic, "ActionTag"));
 	int actionFrameCount = DICTOOL->getArrayCount_json(dic, "actionframelist");
 	for (int i=0; i<actionFrameCount; i++) {
 
-		cs::CSJsonDictionary* actionFrameDic = DICTOOL->getDictionaryFromArray_json(dic, "actionframelist", i);
+		const rapidjson::Value& actionFrameDic = DICTOOL->getDictionaryFromArray_json(dic, "actionframelist", i);
 		int frameInex = DICTOOL->getIntValue_json(actionFrameDic,"frameid");
 
 		bool existPosition = DICTOOL->checkObjectExist_json(actionFrameDic,"positionx");
@@ -141,7 +141,6 @@ void ActionNode::initWithDictionary(cs::CSJsonDictionary *dic,CCObject* root)
 			cActionArray->addObject(actionFrame);
 		}
 
-		CC_SAFE_DELETE(actionFrameDic);
 	}
 	initActionNodeFromRoot(root);
 }

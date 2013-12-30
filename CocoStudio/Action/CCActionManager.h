@@ -28,9 +28,12 @@
 #include "cocos2d.h"
 #include "ExtensionMacros.h"
 #include "CCActionObject.h"
-#include "../Json/CSContentJsonDictionary.h"
+#include "../Json/rapidjson/document.h"
 
 NS_CC_EXT_BEGIN
+
+class ActionObject;
+
 /**
 *   @js NA
 *   @lua NA
@@ -80,7 +83,7 @@ public:
 	ActionObject* playActionByName(const char* jsonName,const char* actionName);
     
     /*init properties with json dictionay*/
-    void initWithDictionary(const char* jsonName,cs::CSJsonDictionary* dic,CCObject* root);
+	void initWithDictionary(const char* jsonName,const rapidjson::Value &dic,CCObject* root);
 
 	/**
      * Release all actions.
