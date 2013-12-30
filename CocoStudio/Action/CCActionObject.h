@@ -28,9 +28,14 @@
 #include "cocos2d.h"
 #include "ExtensionMacros.h"
 #include "CCActionNode.h"
-#include "../Json/CSContentJsonDictionary.h"
+#include "../Json/rapidjson/document.h"
+
+
 
 NS_CC_EXT_BEGIN
+
+class ActionNode;
+
 /**
 *   @js NA
 *   @lua NA
@@ -145,7 +150,7 @@ public:
 	void updateToFrameByTime(float fTime);
 
     /*init properties with a json dictionary*/
-    void initWithDictionary(cs::CSJsonDictionary* dic,CCObject* root);
+	void initWithDictionary(const rapidjson::Value& dic,CCObject* root);
     
 	void simulationActionUpdate(float dt);
 
